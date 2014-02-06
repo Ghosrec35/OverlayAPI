@@ -2,6 +2,8 @@ package net.ghosrec35.overlay.lib;
 
 import java.awt.Color;
 
+import cpw.mods.fml.common.FMLLog;
+
 public class Utils
 {
 	/**
@@ -14,12 +16,11 @@ public class Utils
 	public static int[] getRGBFromHexStr(String hexStr)
 	{
 		Color color = Color.decode(hexStr);
-		int hex = Integer.decode(hexStr);
-
 		int[] rgb = new int[3];
 		rgb[0] = color.getRed();
-		rgb[1] = color.getBlue();
-		rgb[2] = color.getGreen();
+		rgb[1] = color.getGreen();
+		rgb[2] = color.getBlue();
+		color = null;
 		return rgb;
 	}
 
@@ -32,13 +33,9 @@ public class Utils
 	 **/
 	public static String getHexStrFromRGB(int[] rgb)
 	{
-		if (rgb.length == 3)
-		{
-			int red = (rgb[0] << 16);
-			int green = (rgb[1] << 8);
-			int blue = (rgb[2] << 0);
-			int hex = red + green + blue;
-			return Integer.toHexString(hex);
+		if (rgb.length == 3) 
+		{ 
+			return "#" + String.format("%02X%02X%02X", rgb[0], rgb[1], rgb[2]); 
 		}
 		return null;
 	}

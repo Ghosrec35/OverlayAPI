@@ -1,13 +1,13 @@
 package net.ghosrec35.overlay;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class TextureOverlayEntry 
 {
 	/* Bit-wise Values */
@@ -28,8 +28,6 @@ public class TextureOverlayEntry
 	private Map<Integer, OverlayInfo> overlayInfo = new HashMap<Integer, OverlayInfo>();
 	private Map<Integer, Icon> overlayIcons = new HashMap<Integer, Icon>();
 	
-	private TextureOverlayEntry() {}
-	
 	public TextureOverlayEntry(String defaultDir, int detail)
 	{
 		dir = defaultDir;
@@ -49,10 +47,14 @@ public class TextureOverlayEntry
 			overlayInfo.put(locationIndex++, new OverlayInfo(path, nbtKey));
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public void addIcon(Icon icon)
 	{
 		if(icon != null)
+		{
 			overlayIcons.put(iconIndex++, icon);
+			OAPILog.severe("Loaded Icon " + icon.getIconName() + ". Adding to overlayIcons map!");
+		}
 		else
 			OAPILog.severe("Cannot add null Icons to the Icon Map!");
 	}
@@ -64,6 +66,7 @@ public class TextureOverlayEntry
 		return null;
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public Icon getIconFromLayer(int layer)
 	{
 		if(overlayIcons.containsKey(layer))
@@ -73,7 +76,7 @@ public class TextureOverlayEntry
 	
 	public int getNumLayers()
 	{
-		return (locationIndex + 1);
+		return locationIndex;
 	}
 	
 	

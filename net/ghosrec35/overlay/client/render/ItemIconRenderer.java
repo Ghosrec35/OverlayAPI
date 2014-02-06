@@ -56,8 +56,20 @@ public class ItemIconRenderer implements IItemRenderer
 					{
 						OverlayInfo info = entry.getInfoByLayer(i);
 						Icon iconToRender = entry.getIconFromLayer(i);
-						int[] iconColor = Utils.getRGBFromHexStr(item.stackTagCompound.getString(info.getNBTKey()));
-
+						int[] iconColor = null;
+						
+						if(item.stackTagCompound.hasKey(info.getNBTKey()))
+						{
+							if(!item.stackTagCompound.getString(info.getNBTKey()).equalsIgnoreCase("Unset"))
+							{
+								iconColor = Utils.getRGBFromHexStr(item.stackTagCompound.getString(info.getNBTKey()));
+							}
+						}
+						else
+						{
+							item.stackTagCompound.setString(info.getNBTKey(), "Unset");
+						}
+						
 						if (iconColor != null)
 						{
 							RenderItemHelper.drawIconIn3D(item, iconToRender, false, iconColor[0], iconColor[1], iconColor[2]);
@@ -102,7 +114,19 @@ public class ItemIconRenderer implements IItemRenderer
 					{
 						OverlayInfo info = entry.getInfoByLayer(i);
 						Icon iconToRender = entry.getIconFromLayer(i);
-						int[] iconColor = Utils.getRGBFromHexStr(item.stackTagCompound.getString(info.getNBTKey()));
+						int[] iconColor = null;
+						
+						if(item.stackTagCompound.hasKey(info.getNBTKey()))
+						{
+							if(!item.stackTagCompound.getString(info.getNBTKey()).equalsIgnoreCase("Unset"))
+							{
+								iconColor = Utils.getRGBFromHexStr(item.stackTagCompound.getString(info.getNBTKey()));
+							}
+						}
+						else
+						{
+							item.stackTagCompound.setString(info.getNBTKey(), "Unset");
+						}
 
 						if (iconColor != null)
 						{

@@ -1,8 +1,9 @@
-package net.ghosrec35.overlay.event;
+package net.ghosrec35.overlay.client.event;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import net.ghosrec35.overlay.OAPILog;
 import net.ghosrec35.overlay.TextureOverlayEntry;
 import net.ghosrec35.overlay.UnattainedTextureMapException;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -29,22 +30,26 @@ public class TextureLoader
 	{
 		texMap = event.map;
 		
-		for(Item item : entryMap.keySet())
+		if(texMap.textureType == 1)
 		{
-			TextureOverlayEntry entry = entryMap.get(item);
-			for(int i = 0; i < entry.getNumLayers(); i++)
+			for(Item item : entryMap.keySet())
 			{
-				entry.addIcon(texMap.registerIcon(entry.getInfoByLayer(i).getResLocation()));
+				TextureOverlayEntry entry = entryMap.get(item);
+				for(int i = 0; i < entry.getNumLayers(); i++)
+				{
+					OAPILog.severe("Reaching this point!");
+					entry.addIcon(loadTexture(entry.getInfoByLayer(i).getResLocation()));
+				}
 			}
 		}
 	}
 	
-	private Icon loadTexture(ResourceLocation res)
+	private Icon loadTexture(String str)
 	{
-		return texMap.registerIcon(res.getResourceDomain() + res.getResourcePath());
+		return texMap.registerIcon(str);
 	}
 	
-	public static TextureMap getTextureMap() throws UnattainedTextureMapException
+	public static TextureMap getTextureMap()
 	{
 		if(texMap != null)
 			return texMap;

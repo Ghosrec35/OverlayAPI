@@ -37,7 +37,9 @@ public class TooltipDisplayEvent
 				if(GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak))
 				{
 					for(int i = 0; i < entry.getNumLayers(); i++)
-						event.toolTip.add("Layer " + i + " Color: " + event.itemStack.stackTagCompound.getString(entry.getInfoByLayer(i).getNBTKey()));
+					{
+						event.toolTip.add("Layer " + i + " Color (" + entry.getInfoByLayer(i).getNBTKey() + "): " + event.itemStack.stackTagCompound.getString(entry.getInfoByLayer(i).getNBTKey()));
+					}
 				}
 			}
 			else

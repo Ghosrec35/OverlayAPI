@@ -6,7 +6,7 @@ import cpw.mods.fml.common.FMLLog;
 
 public class OAPILog 
 {
-	private static Logger oapiLogger = Logger.getLogger("[OAPI Logger]");
+	private static Logger oapiLogger = Logger.getLogger("OAPI Log");
 	
 	static
 	{

@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 import net.ghosrec35.overlay.CommonProxy;
 import net.ghosrec35.overlay.TextureOverlayEntry;
+import net.ghosrec35.overlay.client.event.TextureLoader;
 import net.ghosrec35.overlay.client.event.TooltipDisplayEvent;
 import net.ghosrec35.overlay.client.render.ItemIconRenderer;
-import net.ghosrec35.overlay.event.TextureLoader;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
